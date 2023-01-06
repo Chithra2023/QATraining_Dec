@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using QATraining_Dec2022.Utilities;
 using System;
 using System.Collections.Generic;
@@ -49,8 +50,8 @@ namespace QATraining_Dec2022.Pages
             //Click on Save
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
-            //Thread.Sleep(2000);
-            Wait.WaitForElementExits(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 5);
+            Thread.Sleep(2000);
+            //Wait.WaitForElementExits(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span", 5);
 
             // Check if new time record has been created
             IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
@@ -58,15 +59,22 @@ namespace QATraining_Dec2022.Pages
             Thread.Sleep(2000);
 
             IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            IWebElement newDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            IWebElement newPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
 
-            if (newCode.Text == "CN_Dec2022")
-            {
-                Console.WriteLine(" The Time record created suscessfully, Test Passed");
-            }
-            else
-            {
-                Console.WriteLine("The Time record hasn't been created sucessfully, Test Failed");
-            }
+            Assert.That(newCode.Text == "CN_Dec2022", "Fail- Actual Code and Expected Code do not match");
+            Assert.That(newDescription.Text == "CN_Dec2022", "Actual Description and Expected decription do not match");
+            Assert.That(newPrice.Text == "$250.00", "Actual Price and Expected Price do not match");
+
+            // another method of assertions
+            //if (newCode.Text == "CN_Dec2022")
+            //{
+            //    Assert.Pass("Time record created sucesfully");
+            //}
+            //else
+            //{
+            //    Assert.Fail("Time record hasn't been created");
+            //}
 
         }
         public void EditTM(IWebDriver driver)
