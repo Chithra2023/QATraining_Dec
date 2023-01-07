@@ -1,13 +1,4 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium;
-using QATraining_Dec2022.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using QATraining_Dec2022.Utilities;
+﻿
 
 namespace QATraining_Dec2022.Tests
 {
@@ -26,21 +17,21 @@ namespace QATraining_Dec2022.Tests
                 //Home page object initialization and definition
                  HomePage homePageObj = new HomePage();
                 homePageObj.GoToTMPage(driver);
-        }
-            [Test]
+            }
+            [Test, Order(1), Description("Check if a new TM record can be created with valid data")]
             public void CreateTM_Tests()
             {
                 //TM Page object initialization and definition
                 TMPage tmPageObj = new TMPage();
                 tmPageObj.CreateTM(driver);
             }
-            [Test]
+            [Test, Order(2), Description("Check if an existing record can be edited with valid data")]
             public void EditTM_Tests()
             {
                 TMPage tmPageObj = new TMPage();
                 tmPageObj.EditTM(driver);
             }
-            [Test]
+            [Test, Order(3), Description("Check if an existing record can be deleted")]
             public void DeleteTM_Tests()
             {
                 TMPage tmPageObj = new TMPage();

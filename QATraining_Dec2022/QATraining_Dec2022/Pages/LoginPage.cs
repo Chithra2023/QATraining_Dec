@@ -1,10 +1,4 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace QATraining_Dec2022.Pages
 {
@@ -18,9 +12,17 @@ namespace QATraining_Dec2022.Pages
             // Launch Turnup Portal
             driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
 
-            // Identify the username  text box and enter valid User Name
-            IWebElement usernameTextBox = driver.FindElement(By.Id("UserName"));
-            usernameTextBox.SendKeys("hari");
+            try
+            {
+                // Identify the username  text box and enter valid User Name
+                IWebElement usernameTextBox = driver.FindElement(By.Id("UserName"));
+                usernameTextBox.SendKeys("hari");
+            }
+
+            catch(Exception ex)
+            {
+                Assert.Fail("Turn up portal page did not launch", ex.Message);
+            }
 
             // Identify the password text box and enter valid password
             IWebElement passwordTextBox = driver.FindElement(By.Id("Password"));
